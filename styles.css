@@ -3,9 +3,16 @@
     padding: 0;
 }
 
-body{
-background-color: #b7d7e6;
-box-sizing: border-box;
+    body{
+    background-color: #b7d7e6;
+    box-sizing: border-box;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+img{
+    width: 63.99px;
+    height: 63.99px;
 }
 
 .header{
@@ -14,7 +21,7 @@ box-sizing: border-box;
 }
 .header-main{
     display: flex;
-    width: 30rem;
+    /* width: 30rem; */
     margin: 0 auto;
     padding-top: 40px;
     justify-content: space-between;
@@ -62,14 +69,28 @@ input[type='search']{
     border-radius: 15px;
     transition: .3s ease-in-out;
 }
-.f{
-    right: 62px;
-    width: 57px;
-}
 .c{
     right: 0;
     width: 64px;
 }
+.f{
+    right: 62px;
+    width: 57px;
+}
+
+.current-location{
+    display: flex;
+    align-items: center;
+}
+.current-loc-img{
+    width: 30px;
+    height: 30px;
+}
+.current-location-p{
+    font-size: 1.2rem;
+    text-transform: capitalize;
+}
+
 .current-temp-wrap{
     display: flex;
     align-items: center;
@@ -91,41 +112,57 @@ input[type='search']{
     font-size: 1.2rem;
 }
 
-.forecast-for-10{
-    max-width: 800px;
-    margin: 0 auto;
+.curr-sensation{
+    margin-bottom: 30px;
+}
+.sunrise-sunset, .sunrise, .sunset{
+    display: flex;
+    align-items: center;
+}
+.sunrise-p, .sunset-p{
+    display: grid;
+    gap: 5px;
+}
+.violet{
+    color: #5f4576;
+    font-weight: bold;
+    text-transform: capitalize;
 }
 
+/* .main{
+    max-width: 800px;
+    margin: 0 auto;
+} */
 .title-section{
     margin-bottom: 30px;
 }
-
 .weather-days{
     list-style: none;
 }
-
 .temp-day, .temp-day-fact{
     align-items: center;
 }
-
 .temp-day{
     display: flex;
     background-color: #fff;
     border-radius: 8px;
     justify-content: space-between;
-    padding: 8px;
+    padding:8px 35px 8px 15px;
 }
-
 .temp-day:nth-child(-n + 9){
     margin-bottom: 5px;
 }
-
 .temp-day-fact{
     display: flex;
     width: 82px;
     gap: 5px;
 }
-
 .invisible{
     font-size: 0;
+}
+
+.footer{
+    text-align: center;
+    width: 800px;
+    margin: 50px 0 30px;
 }
