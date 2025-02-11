@@ -36,7 +36,7 @@ searchLocation.addEventListener("keypress", (e) => {
     lettersArray.splice(-1, 1);
     locationRes = lettersArray.join("");
     checkTempScale();
-    fetchWeatherData(locationRes, tempScale);
+    fetchWeatherData(locationRes.toLowerCase(), tempScale);
     searchLocation.value = "";
     lettersArray = [];
   }
