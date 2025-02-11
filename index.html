@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="header">
+      <img src="./images/location.png" alt="" class="location-img" />
+      <div class="input-wrapper">
+        <input type="search" />
+        <div class="toggle-temp">
+          <button type="button" class="btn-toggle" data-btn-toggle>
+            °F, mi <span class="span-toggle f" data-span-toggle></span>°C, km
+          </button>
+        </div>
+      </div>
+      <div class="header-main">
+        <div class="temp-now">
+          <h3 class="temp-now-title">Сейчас</h3>
+          <div class="current-temp-wrap">
+            <div class="current-temp" data-temp-now></div>
+            <img
+              alt="current-temp-icon"
+              class="current-temp-icon"
+              data-current-icon
+            />
+          </div>
+          <div class="current-temp-minMax-container">
+            <p class="current-temp-min-min" data-current-min>
+              <span class="text">минимум:</span>
+            </p>
+            <p class="current-temp-min-max" data-current-max>
+              <span class="text">максимум:</span>
+            </p>
+          </div>
+        </div>
+        <div class="temp-feels">
+          <h3 class="conditions" data-current-conditions></h3>
+          <p class="curr-sensation" data-current-sensation>
+            <span class="text">ощущается как:</span>
+          </p>
+        </div>
+      </div>
+    </header>
+    <main class="main">
+      <!-- <div class="weather-by-hours">
+        <h4 class="title-section">почасовой прогноз</h4>
+        <div class="button-arrow-l">"--"</div>
+        <ul class="hours-now">
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">0:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">1:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">2:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">3:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">4:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">5:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">6:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">7:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">8:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">9:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">10:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">11:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">12:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">13:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">14:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">15:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">16:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">17:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">18:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">19:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">20:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">21:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">22:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+          <li class="hour">
+            <div class="fact-hour-wrapper">
+              <div class="fact-hour">23:00</div>
+              <img src="" alt="" class="weather-icon" />
+              <div class="fact-hour-temp"></div>
+            </div>
+          </li>
+        </ul>
+        <div class="button-arrow-r">"--"</div>
+      </div> -->
+      <div class="forecast-for-10">
+        <h4 class="title-section">прогноз на 10 дней</h4>
+        <!-- <div class="button-arrow-l">`<`</div> -->
+        <ul class="weather-days">
+          <li class="temp-day">
+            <div class="temp-day-title" data-temp-day></div>
+            <span class="invisible" data-conditions-status></span>
+            <div class="temp-day-fact">
+              <p class="temp-day-min" data-temp-min>°</p>
+              /
+              <p class="temp-day-max" data-temp-max>°</p>
+            </div>
+          </li>
+          <li class="temp-day">
+            <div class="temp-day-title" data-temp-day></div>
+            <span class="invisible" data-conditions-status></span>
+            <div class="temp-day-fact">
+              <p class="temp-day-min" data-temp-min></p>
+              /
+              <p class="temp-day-max" data-temp-max></p>
+            </div>
+          </li>
+          <li class="temp-day">
+            <div class="temp-day-title" data-temp-day></div>
+            <span class="invisible" data-conditions-status></span>
+            <div class="temp-day-fact">
+              <p class="temp-day-min" data-temp-min></p>
+              /
+              <p class="temp-day-max" data-temp-max></p>
+            </div>
+          </li>
+          <li class="temp-day">
+            <div class="temp-day-title" data-temp-day></div>
+            <span class="invisible" data-conditions-status></span>
+            <div class="temp-day-fact">
+              <p class="temp-day-min" data-temp-min></p>
+              /
+              <p class="temp-day-max" data-temp-max></p>
+            </div>
+          </li>
+          <li class="temp-day">
+            <div class="temp-day-title" data-temp-day></div>
+            <span class="invisible" data-conditions-status></span>
+            <div class="temp-day-fact">
+              <p class="temp-day-min" data-temp-min></p>
+              /
+              <p class="temp-day-max" data-temp-max></p>
+            </div>
+          </li>
+          <li class="temp-day">
+            <div class="temp-day-title" data-temp-day></div>
+            <span class="invisible" data-conditions-status></span>
+            <div class="temp-day-fact">
+              <p class="temp-day-min" data-temp-min></p>
+              /
+              <p class="temp-day-max" data-temp-max></p>
+            </div>
+          </li>
+          <li class="temp-day">
+            <div class="temp-day-title" data-temp-day></div>
+            <span class="invisible" data-conditions-status></span>
+            <div class="temp-day-fact">
+              <p class="temp-day-min" data-temp-min></p>
+              /
+              <p class="temp-day-max" data-temp-max></p>
+            </div>
+          </li>
+          <li class="temp-day">
+            <div class="temp-day-title" data-temp-day></div>
+            <span class="invisible" data-conditions-status></span>
+            <div class="temp-day-fact">
+              <p class="temp-day-min" data-temp-min></p>
+              /
+              <p class="temp-day-max" data-temp-max></p>
+            </div>
+          </li>
+          <li class="temp-day">
+            <div class="temp-day-title" data-temp-day></div>
+            <span class="invisible" data-conditions-status></span>
+            <div class="temp-day-fact">
+              <p class="temp-day-min" data-temp-min></p>
+              /
+              <p class="temp-day-max" data-temp-max></p>
+            </div>
+          </li>
+          <li class="temp-day">
+            <div class="temp-day-title" data-temp-day></div>
+            <span class="invisible" data-conditions-status></span>
+            <div class="temp-day-fact">
+              <p class="temp-day-min" data-temp-min></p>
+              /
+              <p class="temp-day-max" data-temp-max></p>
+            </div>
+          </li>
+        </ul>
+        <!-- <div class="button-arrow-r">"></div> -->
+      </div>
+      <div class="wind-by-hours">
+        <h4 class="title-section">ветер</h4>
+        <ul class="wind">
+          <p class="wind-max"></p>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+          <li class="fact-wind">
+            <img src="" alt="" class="wind-icon" />
+            <div class="wind-info">
+              <p class="wind-speed"></p>
+              <p class="wind-hour"></p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </main>
+    <footer class="footer">
+      <a href="https://www.visualcrossing.com/weather-api" class="api"
+        >visualcrossing.com</a
+      >
+      <p class="credits">by kuksito 2025</p>
+    </footer>
+  </body>
+</html>
