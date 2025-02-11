@@ -1,75 +1,158 @@
-// const apiAddress =
-//   "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/petrozavodsk?key=7WASBVZYUP9CKSTKH36CSJRJ4";
+let lettersArray = [];
+let locationRes = "";
+let tempScale;
 
 const daysTempTitle = document.querySelectorAll("[data-temp-day]");
 const daysTempMin = document.querySelectorAll("[data-temp-min]");
 const daysTempMax = document.querySelectorAll("[data-temp-max]");
 const btnToggle = document.querySelector("[data-btn-toggle]");
+const searchLocation = document.querySelector("[data-search]");
 
-fetch(
-  "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/petrozavodsk?unitGroup=metric&key=7WASBVZYUP9CKSTKH36CSJRJ4&contentType=json"
-)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (response) {
-    const currentTemp = document.querySelector("[data-temp-now]");
-    const currentTempMin = document.querySelector("[data-current-min]");
-    const currentTempMax = document.querySelector("[data-current-max]");
-    const currentConditions = document.querySelector(
-      "[data-current-conditions]"
-    );
-    const currentSensation = document.querySelector("[data-current-sensation]");
-    const conditionsStatus = document.querySelectorAll(
-      "[data-conditions-status]"
-    );
-    const currentIcon = document.querySelector("[data-current-icon]");
+const currentLocation = document.querySelector("[data-current-location]");
+const currentTemp = document.querySelector("[data-temp-now]");
+const currentTempMin = document.querySelector("[data-current-min]");
+const currentTempMax = document.querySelector("[data-current-max]");
+const currentConditions = document.querySelector("[data-current-conditions]");
+const currentSensation = document.querySelector("[data-current-sensation]");
+const conditionsStatus = document.querySelectorAll("[data-conditions-status]");
+const currentIcon = document.querySelector("[data-current-icon]");
+const spanToggle = document.querySelector("[data-span-toggle]");
+const sunriseTime = document.querySelector("[data-sunrise-time]");
+const sunsetTime = document.querySelector("[data-sunset-time]");
 
-    console.log(response);
-    console.log(response.days[0].feelslikemax);
+window.onload = () => {
+  fetchWeatherData();
+};
 
-    currentTempMin.append(response.days[0].feelslikemax);
-    currentTempMax.append(response.days[0].feelslikemin);
-    currentConditions.append(response.currentConditions.conditions);
-    currentSensation.append(response.currentConditions.feelslike);
+searchLocation.addEventListener("keypress", (e) => {
+  let letter = e.key;
+  e.stopPropagation();
+  if (letter === "Backspace") {
+    lettersArray.splice(-1, 1);
+  } else {
+    lettersArray.push(letter);
+  }
+  if (letter === "Enter") {
+    lettersArray.splice(-1, 1);
+    locationRes = lettersArray.join("");
+    checkTempScale();
+    fetchWeatherData(locationRes, tempScale);
+    searchLocation.value = "";
+    lettersArray = [];
+  }
+});
 
-    if (currentConditions.textContent === "Overcast") {
-      currentIcon.setAttribute("src", "./images/overcast.png");
-    }
-    if (currentConditions.textContent === "Partially cloudy") {
-      currentIcon.setAttribute("src", "./images/partly-cloudy.png");
-    }
-    if (currentConditions.textContent === "Snow, Overcast") {
-      currentIcon.setAttribute("src", "./images/snow.png");
-    }
+btnToggle.addEventListener("click", () => {
+  spanToggle.classList.toggle("f");
+  checkTempScale();
+  fetchWeatherData(locationRes, tempScale);
+});
 
-    for (let i = 0; i < daysTempTitle.length; i++) {
-      daysTempTitle[i].append(response.days[i].datetime);
-      daysTempMin[i].append(response.days[i].feelslikemax);
-      daysTempMax[i].append(response.days[i].feelslikemin);
-      console.log(response.days[i].conditions);
-      conditionsStatus[i].textContent = response.days[i].conditions;
+function checkTempScale() {
+  if (spanToggle.classList.contains("f")) {
+    tempScale = "us";
+  } else {
+    tempScale = "metric";
+  }
+}
 
-      if (conditionsStatus[i].textContent === "Overcast") {
-        const weatherIcon = document.createElement("img");
-        weatherIcon.src = "./images/overcast.png";
-        conditionsStatus[i].append(weatherIcon);
+function generateWeatherIcon(name, index) {
+  const weatherIcon = document.createElement("img");
+  weatherIcon.src = `./images/${name}.png`;
+  conditionsStatus[index].append(weatherIcon);
+}
+
+function generateTwoIcons(nameOne, nameTwo, index) {
+  const weatherIconOne = document.createElement("img");
+  const weatherIconTwo = document.createElement("img");
+  weatherIconOne.src = `./images/${nameOne}.png`;
+  weatherIconTwo.src = `./images/${nameTwo}.png`;
+  conditionsStatus[index].append(weatherIconOne, weatherIconTwo);
+}
+
+function fetchWeatherData(location = "petrozavodsk", degrees = "metric") {
+  fetch(
+    `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=${degrees}&key=7WASBVZYUP9CKSTKH36CSJRJ4&contentType=json`
+  )
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (response) {
+      console.log(response);
+      currentLocation.textContent = response.address;
+      currentTemp.textContent = `${response.currentConditions.temp}°`;
+      currentTempMin.textContent = `минимум: ${response.days[0].feelslikemax}°`;
+      currentTempMax.textContent = `максимум: ${response.days[0].feelslikemin}°`;
+      currentConditions.textContent = response.currentConditions.conditions;
+      currentSensation.textContent = `ощущается как: ${response.currentConditions.feelslike}°`;
+      sunriseTime.textContent = response.currentConditions.sunrise;
+      sunsetTime.textContent = response.currentConditions.sunset;
+
+      //new func?
+      if (currentConditions.textContent === "Overcast") {
+        currentIcon.setAttribute("src", "./images/overcast.png");
       }
-      if (conditionsStatus[i].textContent === "Partially cloudy") {
-        const weatherIcon = document.createElement("img");
-        weatherIcon.src = "./images/partly-cloudy.png";
-        conditionsStatus[i].append(weatherIcon);
+      if (currentConditions.textContent === "Partially cloudy") {
+        currentIcon.setAttribute("src", "./images/partly-cloudy.png");
       }
-      if (conditionsStatus[i].textContent === "Snow, Overcast") {
-        const weatherIcon = document.createElement("img");
-        weatherIcon.src = "./images/snow.png";
-        conditionsStatus[i].append(weatherIcon);
+      if (currentConditions.textContent === "Snow, Overcast") {
+        currentIcon.setAttribute("src", "./images/snow.png");
       }
-    }
-    currentTemp.append(response.currentConditions.temp);
 
-    btnToggle.addEventListener("click", () => {
-      const spanToggle = document.querySelector("[data-span-toggle]");
-      spanToggle.classList.toggle("c");
+      for (let i = 0; i < daysTempTitle.length; i++) {
+        daysTempTitle[i].textContent = response.days[i].datetime;
+        daysTempMin[i].textContent = `${response.days[i].feelslikemax}°`;
+        daysTempMax[i].textContent = `${response.days[i].feelslikemin}°`;
+        console.log(response.days[i].conditions);
+        conditionsStatus[i].textContent = response.days[i].conditions;
+
+        //weatherIcon - in new func
+        //colnditionsStatus - in new func?
+        if (conditionsStatus[i].textContent === "Overcast") {
+          generateWeatherIcon("overcast", i);
+        }
+        if (conditionsStatus[i].textContent === "Partially cloudy") {
+          generateWeatherIcon("partly-cloudy", i);
+        }
+        if (conditionsStatus[i].textContent === "Clear") {
+          generateWeatherIcon("clear", i);
+        }
+        if (
+          conditionsStatus[i].textContent === "Snow, Overcast" ||
+          conditionsStatus[i].textContent === "Snow"
+        ) {
+          generateWeatherIcon("snow", i);
+        }
+        if (
+          conditionsStatus[i].textContent === "Rain" ||
+          conditionsStatus[i].textContent === "Rain, Partially cloudy" ||
+          conditionsStatus[i].textContent === "Rain, Overcast"
+        ) {
+          generateWeatherIcon("rain", i);
+        }
+        if (conditionsStatus[i].textContent === "Snow, Partially cloudy") {
+          generateTwoIcons("partly-cloudy", "snowflake", i);
+        }
+        if (
+          conditionsStatus[i].textContent === "Snow, Rain, Partially cloudy" ||
+          conditionsStatus[i].textContent === "Snow, Rain, Overcast"
+        ) {
+          generateTwoIcons("rain", "snowflake", i);
+        }
+        if (
+          conditionsStatus[i].textContent ===
+          "Snow, Rain, Freezing Drizzle/Freezing Rain, Overcast"
+        ) {
+          generateWeatherIcon("freezing-rain", i);
+        }
+      }
+
+      if (
+        response.currentConditions.datetime ===
+        response.currentConditions.sunset
+      ) {
+        document.querySelector("body").style.backgroundColor = "#645179";
+        document.querySelector(".violet").style.color = "#d3b5ed";
+      }
     });
-  });
+}
