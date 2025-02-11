@@ -11,14 +11,22 @@
     <header class="header">
       <img src="./images/location.png" alt="" class="location-img" />
       <div class="input-wrapper">
-        <input type="search" />
+        <input type="search" data-search />
         <div class="toggle-temp">
           <button type="button" class="btn-toggle" data-btn-toggle>
-            °F, mi <span class="span-toggle f" data-span-toggle></span>°C, km
+            °F, mi <span class="span-toggle c" data-span-toggle></span>°C, km
           </button>
         </div>
       </div>
       <div class="header-main">
+        <div class="current-location">
+          <img
+            class="current-loc-img"
+            src="./images/location.png"
+            alt="current-location"
+          />
+          <p class="violet" data-current-location></p>
+        </div>
         <div class="temp-now">
           <h3 class="temp-now-title">Сейчас</h3>
           <div class="current-temp-wrap">
@@ -43,6 +51,22 @@
           <p class="curr-sensation" data-current-sensation>
             <span class="text">ощущается как:</span>
           </p>
+          <div class="sunrise-sunset">
+            <div class="sunrise">
+              <img src="./images/sunrise.png" alt="sunrise" />
+              <p class="sunrise-p">
+                рассвет в
+                <span class="violet" data-sunrise-time></span>
+              </p>
+            </div>
+            <div class="sunset">
+              <img src="./images/sunset.png" alt="sunset" />
+              <p class="sunset-p">
+                закат в
+                <span class="violet" data-sunset-time></span>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </header>
@@ -319,7 +343,7 @@
         </ul>
         <!-- <div class="button-arrow-r">"></div> -->
       </div>
-      <div class="wind-by-hours">
+      <!-- <div class="wind-by-hours">
         <h4 class="title-section">ветер</h4>
         <ul class="wind">
           <p class="wind-max"></p>
@@ -492,7 +516,7 @@
             </div>
           </li>
         </ul>
-      </div>
+      </div> -->
     </main>
     <footer class="footer">
       <a href="https://www.visualcrossing.com/weather-api" class="api"
