@@ -148,11 +148,12 @@ function fetchWeatherData(location = "petrozavodsk", degrees = "metric") {
       }
 
       if (
-        response.currentConditions.datetime ===
-        response.currentConditions.sunset
+        response.currentConditions.datetime > response.currentConditions.sunset
       ) {
         document.querySelector("body").style.backgroundColor = "#645179";
         document.querySelector(".violet").style.color = "#d3b5ed";
+        document.querySelector(".violet.sun-v").style.color = "#d3b5ed";
+        document.querySelector(".violet.suns-v").style.color = "#d3b5ed";
       }
     });
 }
